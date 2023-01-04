@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import TextIcon from '@mui/icons-material/TextSmsOutlined';
+import TextIcon from '@mui/icons-material/TextsmsOutlined';
 import { useTheme } from '@mui/material/styles';
 
 axios.defaults.xsrfCookieName = 'csrftoken';

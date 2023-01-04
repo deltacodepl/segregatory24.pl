@@ -1,0 +1,67 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.2
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME:-database}
+      POSTGRES_USER: ${DB_USER:-user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      # POSTGRES_HOST_AUTH_METHOD: "trust"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      args:
+        REQUIREMENTS_FILE: requirements.txt
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file: .env
+    command: 'sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"'
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+
+  # queue:
+  #   build:
+  #     context: .
+  #     args:
+  #       REQUIREMENTS_FILE: requirements.txt
+  #   restart: unless-stopped
+  #   env_file: .env
+  #   command: sh /entrypoint-queue.sh
+  #   volumes:
+  #     - ./backend:/app
+
+  # beat:
+  #   build:
+  #     context: .
+  #     args:
+  #       REQUIREMENTS_FILE: requirements.txt
+  #   restart: unless-stopped
+  #   env_file: .env
+  #   command: sh /entrypoint-beat.sh
+  #   volumes:
+  #     - ./:/app
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    restart: always
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+volumes:
+  db-data:

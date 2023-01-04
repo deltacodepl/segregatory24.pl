@@ -15,7 +15,7 @@ import InfoIcon from '@mui/icons-material/InfoOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import ListIcon from '@mui/icons-material/FormatListBulleted';
-import TextIcon from '@mui/icons-material/TextSmsOutlined';
+import TextIcon from '@mui/icons-material/TextsmsOutlined';
 import { useTheme } from '@mui/material/styles';
 
 import CustomButton from '../components/CustomButton';
@@ -59,7 +59,7 @@ const Sidebar = ({ open, onClose }) => {
                   textDecoration='none'
                   marginLeft='10px'
                 >
-                  Bob's Programming Academy
+                  Segregatory24.pl
                 </Typography>
               </IconButton>
             </Link>

@@ -2,6 +2,7 @@
 .env
 .DS_Store
 .next/
+.idea/
 db.sqlite3
 media/
 node_modules/
